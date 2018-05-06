@@ -1,0 +1,25 @@
+version: '2'
+services:
+  mysql:
+    container_name: mysql
+    environment:
+      MYSQL_DATABASE: chatterdb
+      MYSQL_ROOT_USER: root
+      MYSQL_ROOT_PASSWORD: fakepassword
+      MYSQL_USER: root
+      MYSQL_PASSWORD: fakepassword
+    image: mysql
+    volumes:
+     - mysql:/var/lib/mysql
+
+  app:
+    image: chatter
+    links:
+      - mysql
+    environment:
+      APP_DEBUG: 1
+    ports:
+      - 8080:8080
+
+volumes:
+  mysql:

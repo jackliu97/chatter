@@ -1,27 +1,31 @@
 package main
 
 import (
-	"chatter/handlers"
 	"fmt"
 	"github.com/gorilla/mux"
-	"log"
+	"github.com/jackliu97/chatter/handlers"
 	"net/http"
-	"time"
+	"github.com/jackliu97/chatter/dao"
+	"github.com/jackliu97/chatter/config"
+	"github.com/spf13/viper"
 )
 
 func main() {
-	addr := "127.0.0.1:8080"
+	fmt.Println("Init Config...")
+	config.InitConfig()
+
+	port := fmt.Sprintf(":%d", viper.Get("port"))
 	r := mux.NewRouter()
-	r.HandleFunc("/chat", handlers.GetChatHandler).Methods("GET")
-	r.HandleFunc("/chat", handlers.PostChatHandler).Methods("POST")
 
-	srv := &http.Server{
-		Handler:      r,
-		Addr:         addr,
-		WriteTimeout: 15 * time.Second,
-		ReadTimeout:  15 * time.Second,
-	}
+	r.HandleFunc("/user", handlers.NewUser).Methods("PUT")
+	r.HandleFunc("/login", handlers.LogIn).Methods("POST")
 
-	fmt.Println("Starting chat server on " + addr + "...")
-	log.Fatal(srv.ListenAndServe())
+	r.Handle("/chat", handlers.AuthenticationMiddleware(handlers.GetChatHandler)).Methods("GET")
+	r.Handle("/chat", handlers.AuthenticationMiddleware(handlers.PostChatHandler)).Methods("POST")
+
+	fmt.Println("Opening db connection...")
+	dao.Init()
+
+	fmt.Println("Starting chat server on port " + port + "...")
+	http.ListenAndServe(port, r)
 }

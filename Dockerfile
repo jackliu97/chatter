@@ -2,15 +2,19 @@ FROM golang:1.10
 
 MAINTAINER jackliu97@gmail.com
 
-WORKDIR /tmp
+WORKDIR /app
 
-COPY . /go/src/chatter
+COPY . /go/src/github.com/jackliu97/chatter
 
-WORKDIR /go/src/chatter
+WORKDIR /go/src/github.com/jackliu97/chatter
 
-RUN go get && go build .
+RUN go get github.com/gorilla/mux
+RUN go get github.com/go-sql-driver/mysql
+RUN go get golang.org/x/crypto/bcrypt
+RUN go get github.com/spf13/viper
 
-ENTRYPOINT ./chatter
+RUN go install
 
-EXPOSE 8080 8080
+ENTRYPOINT /go/bin/chatter
 
+EXPOSE 8080

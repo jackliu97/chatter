@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+
+docker run -p 8080:8080 --name chatter -d chatter
+
+docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' chatter

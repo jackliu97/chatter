@@ -1,0 +1,6 @@
+db_driver: mysql
+db_name: chatterdb
+db_user: root
+db_pass: fakepassword
+
+port: 8080
