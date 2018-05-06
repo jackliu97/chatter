@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+
+docker run --name mysql -e MYSQL_ROOT_PASSWORD=fakepassword -d mysql:latest
+docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' mysql

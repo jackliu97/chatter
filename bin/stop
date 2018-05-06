@@ -1,3 +1,4 @@
 #!/usr/bin/env sh
 
 docker rm -f $(docker ps -aq --filter "name=chatter")
+docker rm -f $(docker ps -aq --filter "name=mysql")
