@@ -22,6 +22,7 @@
     /user `POST`
     
     Payload
+    
      - username
      - password
      
@@ -42,6 +43,7 @@
     /login `POST`
     
     Payload
+    
          - username
          - password
          
