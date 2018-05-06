@@ -5,8 +5,8 @@ import (
 )
 
 type User struct {
-	username string
-	password string
+	username string `json:"username"`
+	password string `json:"password"`
 }
 
 // SetUsername sets the username

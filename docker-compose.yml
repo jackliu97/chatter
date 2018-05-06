@@ -12,10 +12,15 @@ services:
     volumes:
      - mysql:/var/lib/mysql
 
+  redis:
+    container_name: redis
+    image: redis
+
   app:
     image: chatter
     links:
       - mysql
+      - redis
     environment:
       APP_DEBUG: 1
     ports:

@@ -1,16 +1,16 @@
 package handlers
 
 import (
-	"net/http"
 	"fmt"
+	"net/http"
 )
 
 func AuthenticationMiddleware(next http.Handler) http.Handler {
-	return http.HandlerFunc(func (w http.ResponseWriter, r *http.Request) {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		// always pass for now
 		pass := true
 
-		if(pass) {
+		if pass {
 			next.ServeHTTP(w, r)
 			return
 		}

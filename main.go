@@ -3,11 +3,11 @@ package main
 import (
 	"fmt"
 	"github.com/gorilla/mux"
-	"github.com/jackliu97/chatter/handlers"
-	"net/http"
-	"github.com/jackliu97/chatter/dao"
 	"github.com/jackliu97/chatter/config"
+	"github.com/jackliu97/chatter/dao"
+	"github.com/jackliu97/chatter/handlers"
 	"github.com/spf13/viper"
+	"net/http"
 )
 
 func main() {
@@ -17,14 +17,18 @@ func main() {
 	port := fmt.Sprintf(":%d", viper.Get("port"))
 	r := mux.NewRouter()
 
-	r.HandleFunc("/user", handlers.NewUser).Methods("PUT")
+	// static contents
+	r.Handle("/", http.FileServer(http.Dir("./public")))
+	r.PathPrefix("/public/").Handler(http.StripPrefix("/public/", http.FileServer(http.Dir("./public/"))))
+
+	// api routing
+	r.HandleFunc("/ws", handlers.Connections)
+	r.HandleFunc("/user", handlers.NewUser).Methods("POST")
 	r.HandleFunc("/login", handlers.LogIn).Methods("POST")
 
-	r.Handle("/chat", handlers.AuthenticationMiddleware(handlers.GetChatHandler)).Methods("GET")
-	r.Handle("/chat", handlers.AuthenticationMiddleware(handlers.PostChatHandler)).Methods("POST")
-
-	fmt.Println("Opening db connection...")
 	dao.Init()
+	dao.Seed()
+	handlers.InitChat()
 
 	fmt.Println("Starting chat server on port " + port + "...")
 	http.ListenAndServe(port, r)

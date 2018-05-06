@@ -1,5 +1,6 @@
 #!/usr/bin/env sh
-
-docker run -p 8080:8080 --name chatter -d chatter
+docker run --name mysql -e MYSQL_ROOT_PASSWORD=fakepassword -d mysql
+docker run --name redis -d redis redis-server
+docker run -p 8080:8080 --name chatter --link redis --link mysql -d chatter
 
 docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' chatter

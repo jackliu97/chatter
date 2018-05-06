@@ -1,47 +1,68 @@
 package handlers
 
 import (
-	"net/http"
+	"encoding/json"
+	"fmt"
 	"github.com/jackliu97/chatter/dao"
 	"github.com/jackliu97/chatter/pogo"
+	"io/ioutil"
 	"log"
-	"fmt"
+	"net/http"
 )
 
-type User struct {
-	Username string
-	Password string
+type user struct {
+	Username string `json:"username"`
+	Password string `json:"password"`
 }
 
 func NewUser(w http.ResponseWriter, r *http.Request) {
-	r.ParseForm()
+	body, _ := ioutil.ReadAll(r.Body)
 
-	username := r.FormValue("username")
-	user, err := pogo.MakeUser(username, r.FormValue("password"))
+	var u user
+	json.Unmarshal(body, &u)
+
+	user, err := pogo.MakeUser(u.Username, u.Password)
 	if err != nil {
 		log.Print(err)
-		w.WriteHeader(http.StatusBadRequest)
-		w.Write([]byte(fmt.Sprintf("User [%s] failed to create", username)))
+		JsonWriter(w, &Response{
+			Code:  http.StatusBadRequest,
+			Error: fmt.Sprintf("User [%s] failed to create", u.Username),
+		})
 		return
 	}
 
-	dao.InsertUser(user)
+	err = dao.InsertUser(user)
+	if err != nil {
+		log.Print(err)
+		JsonWriter(w, &Response{
+			Code:  http.StatusBadRequest,
+			Error: fmt.Sprintf("User [%s] failed to create", u.Username),
+		})
+		return
+	}
 
-	w.Write([]byte(fmt.Sprintf("User [%s] successfully created", username)))
+	JsonWriter(w, &Response{
+		Code: http.StatusCreated,
+	})
 }
 
 func LogIn(w http.ResponseWriter, r *http.Request) {
-	r.ParseForm()
+	body, _ := ioutil.ReadAll(r.Body)
 
-	username := r.FormValue("username")
-	err := dao.VerifyUser(username, r.FormValue("password"))
+	var u user
+	json.Unmarshal(body, &u)
 
+	err := dao.VerifyUser(u.Username, u.Password)
 	if err != nil {
 		log.Println(err)
-		w.WriteHeader(http.StatusUnauthorized)
-		w.Write([]byte(fmt.Sprintf("Invalid user [%s]", username)))
+		JsonWriter(w, &Response{
+			Code: http.StatusUnauthorized,
+			Error: fmt.Sprintf("Invalid user [%s]", u.Username),
+		})
 		return
 	}
 
-	w.Write([]byte(fmt.Sprintf("User [%s] logged in successfully!", username)))
+	JsonWriter(w, &Response{
+		Code: http.StatusOK,
+	})
 }
