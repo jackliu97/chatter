@@ -1,10 +1,12 @@
 package dao
 
 import (
-	"fmt"
 	_ "github.com/go-sql-driver/mysql"
-	"github.com/jackliu97/chatter/pogo"
+
+	"fmt"
 	"log"
+
+	"github.com/jackliu97/chatter/data"
 )
 
 const (
@@ -12,7 +14,7 @@ const (
 	selectUser = "SELECT username, password FROM users WHERE username = ?"
 )
 
-func InsertUser(user *pogo.User) error {
+func InsertUser(user *data.User) error {
 	stmt, err := db.Prepare(insertUser)
 	if err != nil {
 		return fmt.Errorf("error preparing insert user statement [%s]", err)
@@ -46,7 +48,7 @@ func VerifyUser(username string, password string) error {
 		return fmt.Errorf("at Scan username: [%s] error: %s", username, err)
 	}
 
-	user, err := pogo.MakeUser(usernameResult, passwordResult)
+	user, err := data.MakeUser(usernameResult, passwordResult)
 	if err != nil {
 		return fmt.Errorf("at MakeUser username: [%s] error: %s", username, err)
 	}

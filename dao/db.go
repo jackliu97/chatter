@@ -10,7 +10,9 @@ var (
 	db *sql.DB
 )
 
-func Init() {
+func init() {
+	fmt.Println("init Db...")
+
 	var err error
 	db, err = sql.Open(viper.GetString("db_driver"),
 		fmt.Sprintf("%s:%s@/%s",
@@ -20,4 +22,6 @@ func Init() {
 	if err != nil {
 		panic(err)
 	}
+
+	seed()
 }

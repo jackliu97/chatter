@@ -1,4 +1,4 @@
-package pogo
+package data
 
 // Define our message object
 type Message struct {

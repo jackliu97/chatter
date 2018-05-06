@@ -1,20 +1,19 @@
 package main
 
 import (
+	_ "github.com/jackliu97/chatter/config"
+	_ "github.com/jackliu97/chatter/dao"
+	_ "github.com/jackliu97/chatter/handlers"
+
 	"fmt"
+	"net/http"
+
 	"github.com/gorilla/mux"
-	"github.com/jackliu97/chatter/config"
-	"github.com/jackliu97/chatter/dao"
 	"github.com/jackliu97/chatter/handlers"
 	"github.com/spf13/viper"
-	"net/http"
 )
 
 func main() {
-	fmt.Println("Init Config...")
-	config.InitConfig()
-
-	port := fmt.Sprintf(":%d", viper.Get("port"))
 	r := mux.NewRouter()
 
 	// static contents
@@ -25,11 +24,9 @@ func main() {
 	r.HandleFunc("/ws", handlers.Connections)
 	r.HandleFunc("/user", handlers.NewUser).Methods("POST")
 	r.HandleFunc("/login", handlers.LogIn).Methods("POST")
+	r.HandleFunc("/messages", handlers.GetMessages).Methods("GET")
 
-	dao.Init()
-	dao.Seed()
-	handlers.InitChat()
-
+	port := fmt.Sprintf(":%d", viper.Get("port"))
 	fmt.Println("Starting chat server on port " + port + "...")
 	http.ListenAndServe(port, r)
 }

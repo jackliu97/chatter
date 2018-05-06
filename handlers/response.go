@@ -1,9 +1,9 @@
 package handlers
 
 import (
-	"net/http"
-	"fmt"
 	"encoding/json"
+	"fmt"
+	"net/http"
 )
 
 // Response represents a JSON response that a handler would use to output

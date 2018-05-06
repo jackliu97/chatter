@@ -43,6 +43,12 @@
                 <i class="material-icons right">chat</i>
                 Send
             </button>
+
+            <button class="waves-effect waves-light btn" @click="logout">
+                <i class="material-icons right">chat</i>
+                Log out
+            </button>
+
         </div>
     </div>
 
@@ -51,7 +57,7 @@
             <input type="email" v-model.trim="username" placeholder="Username">
         </div>
         <div class="input-field col s8">
-            <input type="text" v-model.trim="password" placeholder="Password">
+            <input type="password" v-model.trim="password" placeholder="Password">
         </div>
         <div class="input-field col s4">
             <button class="waves-effect waves-light btn" @click="login()">

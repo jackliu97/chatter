@@ -3,11 +3,12 @@ package handlers
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/jackliu97/chatter/dao"
-	"github.com/jackliu97/chatter/pogo"
 	"io/ioutil"
 	"log"
 	"net/http"
+
+	"github.com/jackliu97/chatter/dao"
+	"github.com/jackliu97/chatter/data"
 )
 
 type user struct {
@@ -21,7 +22,7 @@ func NewUser(w http.ResponseWriter, r *http.Request) {
 	var u user
 	json.Unmarshal(body, &u)
 
-	user, err := pogo.MakeUser(u.Username, u.Password)
+	user, err := data.MakeUser(u.Username, u.Password)
 	if err != nil {
 		log.Print(err)
 		JsonWriter(w, &Response{
@@ -56,7 +57,7 @@ func LogIn(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Println(err)
 		JsonWriter(w, &Response{
-			Code: http.StatusUnauthorized,
+			Code:  http.StatusUnauthorized,
 			Error: fmt.Sprintf("Invalid user [%s]", u.Username),
 		})
 		return
