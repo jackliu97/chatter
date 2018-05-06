@@ -1,6 +1,6 @@
-###Chatter
+### Chatter
 
-####Setup
+#### Setup
 1. Run `./bin/build && ./bin/startsql`
 2. Take the ip output in the final line and update config.yaml's `db_ip` with that value.
 3. Run `./bin/startapp`
@@ -10,12 +10,12 @@
  - you can run `./bin/stop` anytime to stop and remove containers
  NOTE: There's no volume binding, so you will lose ALL of your chats + users.
  
- ####Usage
+ #### Usage
   1. Create a user by providing a unique username and a password, you should be logged in on success.
   2. Start chatting
  
  
- ####Endpoints
+ #### Endpoints
  
   - Create users
     
