@@ -24,12 +24,12 @@
  
   - **Create users**
     
-    > /user `POST`
+    > `POST` /user
     
     Payload
     
-     - username
-     - password
+     - username <string>
+     - password <string>
      
     Example `POST` payload
     
@@ -46,12 +46,12 @@
 
   - **Login user**
   
-    > /login `POST`
+    > `POST` /login
     
     Payload
     
-         - username
-         - password
+         - username <string>
+         - password <string>
          
     Example `POST` payload
     
@@ -67,7 +67,7 @@
     
   - **Get Messages**
     
-    > /messages `GET`
+    > `GET` /messages?page=<int>&size=<int>
     
     Example `GET` call
     ```
