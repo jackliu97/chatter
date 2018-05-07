@@ -7,7 +7,7 @@ import (
 type User struct {
 	username string `json:"username"`
 	password string `json:"password"`
-	salt string
+	salt     string
 }
 
 // SetUsername sets the username

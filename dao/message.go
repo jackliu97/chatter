@@ -38,10 +38,10 @@ func GetMessage(pageNum int, pageSize int) ([]data.Message, error) {
 
 	// page starts at 1. if 0 or lower is passed, we assume 1.
 	if pageNum < 1 {
-		pageNum = 1;
+		pageNum = 1
 	}
 
-	offset := pageSize * (pageNum-1)
+	offset := pageSize * (pageNum - 1)
 
 	if err != nil {
 		return nil, fmt.Errorf("at prepare error: %s", err)

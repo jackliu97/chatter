@@ -1,5 +1,8 @@
 ### Chatter
 
+#### Requirements
+ - docker 18.03
+
 #### Setup
 1. Run `./bin/build && ./bin/startsql`
 2. Take the ip output in the final line and update config.yaml's `db_ip` with that value.
@@ -17,7 +20,7 @@
  
  #### Endpoints
  
-  - Create users
+  - **Create users**
     
     /user `POST`
     
@@ -38,7 +41,7 @@
     Failure: A HTTP 400 response
 
 
-  - Login user
+  - **Login user**
   
     /login `POST`
     
@@ -58,7 +61,7 @@
     
     Failure: HTTP 401 response
     
-  - Get Messages
+  - **Get Messages**
     
     /messages `GET`
     
@@ -102,4 +105,6 @@
     
     
     
-    
+#### TODOs
+ - Login / log out functionality is extrememly primitive.
+ - Cannot drag and drop images.

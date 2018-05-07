@@ -40,7 +40,7 @@ new Vue({
             console.log("populate field");
 
             // make a get to retrieve the past 20 messages
-            fetch('http://localhost:8080/messages?page=0&size=20')
+            fetch('http://' + window.location.host + '/messages?page=0&size=20')
                 .then(function(response){
                     response.text().then(function(text) {
                         var messages = JSON.parse(text);
@@ -87,7 +87,7 @@ new Vue({
                 return;
             }
 
-            fetch('http://localhost:8080/login', {
+            fetch('http://' + window.location.host + '/login', {
                 method: 'POST',
                 body:JSON.stringify(
                     {
@@ -120,7 +120,7 @@ new Vue({
                 return;
             }
 
-            fetch('http://localhost:8080/user', {
+            fetch('http://' + window.location.host + '/user', {
                 method: 'POST',
                 body:JSON.stringify(
                     {

@@ -2,6 +2,6 @@ db_driver: mysql
 db_name: chatterdb
 db_user: root
 db_pass: fakepassword
-db_ip: 172.17.0.2
-
+#db_ip: 172.17.0.2
+db_ip: localhost
 port: 8080

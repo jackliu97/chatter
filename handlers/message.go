@@ -77,6 +77,8 @@ func messages() {
 	for {
 		msg := <-broadcast
 
+		data.ParseMessage(&msg)
+
 		// save message to db
 		go dao.InsertMessage(&msg)
 
