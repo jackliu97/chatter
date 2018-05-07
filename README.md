@@ -22,14 +22,15 @@
  
   - **Create users**
     
-    /user `POST`
+    > /user `POST`
     
     Payload
     
      - username
      - password
      
-    Example
+    Example `POST` payload
+    
     ```
     Content-Type: application/json
     
@@ -43,14 +44,15 @@
 
   - **Login user**
   
-    /login `POST`
+    > /login `POST`
     
     Payload
     
          - username
          - password
          
-    Example
+    Example `POST` payload
+    
     ```
     Content-Type: application/json
         
@@ -63,9 +65,9 @@
     
   - **Get Messages**
     
-    /messages `GET`
+    > /messages `GET`
     
-    Example
+    Example `GET` call
     ```
     /messages?page=1&size=15
     ```
@@ -106,5 +108,6 @@
     
     
 #### TODOs
- - Login / log out functionality is extrememly primitive.
+ - Login / log out functionality is very primitive. No session id or token is stored onto cookie.
  - Cannot drag and drop images.
+ - Currently, image and video metadata are hard coded.

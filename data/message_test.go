@@ -2,7 +2,7 @@ package data
 
 import (
 	"encoding/json"
-	"github.com/magiconair/properties/assert"
+	"github.com/stretchr/testify/assert"
 	"testing"
 )
 // To test everything: go test ./data
@@ -22,7 +22,7 @@ func Test_ParseMessage_IsImage(t *testing.T) {
 		Url:    testUrl,
 	})
 
-	assert.Equal(t, m.Message, string(expected))
+	assert.Equal(t, string(expected), m.Message)
 }
 
 // go test ./data -run Test_ParseMessage_IsVideo -v
@@ -41,7 +41,7 @@ func Test_ParseMessage_IsVideo(t *testing.T) {
 		Url:    testUrl,
 	})
 
-	assert.Equal(t, m.Message, string(expected))
+	assert.Equal(t, string(expected), m.Message)
 }
 
 // go test ./data -run Test_ParseMessage_OtherURL -v
@@ -56,7 +56,7 @@ func Test_ParseMessage_OtherURL(t *testing.T) {
 
 	expected := testUrl
 
-	assert.Equal(t, m.Message, expected)
+	assert.Equal(t, expected, m.Message)
 }
 
 // go test ./data -run Test_ParseMessage_NormalMessage -v
@@ -71,5 +71,5 @@ func Test_ParseMessage_NormalMessage(t *testing.T) {
 
 	expected := testUrl
 
-	assert.Equal(t, m.Message, expected)
+	assert.Equal(t, expected, m.Message)
 }

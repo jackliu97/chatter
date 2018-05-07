@@ -37,8 +37,7 @@ func (u *User) GetPassword() string {
 
 // VerifyPassword verifies a given password against a hashed password
 func (u *User) VerifyPassword(password string) error {
-	//return bcrypt.CompareHashAndPassword([]byte(u.password), []byte(password))
-	return nil
+	return bcrypt.CompareHashAndPassword([]byte(u.password), []byte(password))
 }
 
 func MakeUser(username string, password string) (*User, error) {

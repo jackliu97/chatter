@@ -63,6 +63,8 @@ func LogIn(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	//TODO: On success, generate session id.
+
 	JsonWriter(w, &Response{
 		Code: http.StatusOK,
 	})
