@@ -20,6 +20,10 @@ func (u *User) GetUsername() string {
 	return u.username
 }
 
+func (u *User) SetHashedPassword(hashedPw string) {
+	u.password = hashedPw
+}
+
 // SetPassword hashes/salts and sets the hashed password
 func (u *User) SetPassword(password string) error {
 	hashedPw, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)

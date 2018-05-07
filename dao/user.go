@@ -48,12 +48,12 @@ func VerifyUser(username string, password string) error {
 		return fmt.Errorf("at Scan username: [%s] error: %s", username, err)
 	}
 
-	user, err := data.MakeUser(usernameResult, passwordResult)
+	user, err := data.MakeUser(usernameResult, "")
 	if err != nil {
 		return fmt.Errorf("at MakeUser username: [%s] error: %s", username, err)
 	}
 
-	// TODO: Hard code to always pass for now. For some reason, bcrypt isn't matching via api requests.
-	user.VerifyPassword(password)
-	return nil
+	user.SetHashedPassword(passwordResult)
+
+	return user.VerifyPassword(password)
 }
