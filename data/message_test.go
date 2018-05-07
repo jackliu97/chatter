@@ -26,6 +26,26 @@ func Test_ParseMessage_IsImage(t *testing.T) {
 	assert.Equal(t, string(expected), m.Message)
 }
 
+// To test everything: go test ./data
+// go test ./data -run Test_ParseMessage_IsImage -v
+func Test_ParseMessage_IsImageWithParams(t *testing.T) {
+	testUrl := "https://images.pexels.com/photos/67636/rose-blue-flower-rose-blooms-67636.jpeg?test=value"
+	m := &Message{
+		Message:  testUrl,
+		Username: "jackliu97",
+	}
+
+	ParseMessage(m)
+
+	expected, _ := json.Marshal(ImageMessage{
+		Width:  200,
+		Height: 100,
+		Url:    testUrl,
+	})
+
+	assert.Equal(t, string(expected), m.Message)
+}
+
 // go test ./data -run Test_ParseMessage_IsVideo -v
 func Test_ParseMessage_IsVideo(t *testing.T) {
 	testUrl := "https://images.pexels.com/photos/67636/rose-blue-flower-rose-blooms-67636.mp4"

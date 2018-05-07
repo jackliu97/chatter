@@ -89,14 +89,14 @@ func ParseMessage(msg *Message) {
 }
 
 func isVideo(url *url.URL) bool {
-	ext := filepath.Ext(url.String())
+	ext := filepath.Ext(url.Path)
 
 	_, ok := videos[ext]
 	return ok
 }
 
 func isImage(url *url.URL) bool {
-	ext := filepath.Ext(url.String())
+	ext := filepath.Ext(url.Path)
 
 	_, ok := images[ext]
 	return ok
