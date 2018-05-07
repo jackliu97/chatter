@@ -1,7 +1,7 @@
 ### Chatter
 
 #### Requirements
- - docker 18.03
+ - [Docker](https://www.docker.com/community-edition)
 
 #### Setup
 1. Run `./bin/build && ./bin/startsql`
@@ -14,7 +14,9 @@
  NOTE: There's no volume binding, so you will lose ALL of your chats + users.
  
  #### Usage
-  1. Create a user by providing a unique username and a password, you should be logged in on success.
+  1. 
+    - Create a user by providing a unique username and a password, you should be logged in on success.
+    - Log back in with the same user.
   2. Start chatting
  
  
