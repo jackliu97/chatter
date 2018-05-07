@@ -26,10 +26,10 @@
     
     > `POST` /user
     
-    Payload
+    Payload (application/json)
     
-     - username <string>
-     - password <string>
+     - username (string)
+     - password (string)
      
     Example `POST` payload
     
@@ -48,10 +48,10 @@
   
     > `POST` /login
     
-    Payload
+    Payload (application/json)
     
-         - username <string>
-         - password <string>
+     - username (string)
+     - password (string)
          
     Example `POST` payload
     
@@ -67,7 +67,7 @@
     
   - **Get Messages**
     
-    > `GET` /messages?page=<int>&size=<int>
+    > `GET` /messages?page=(int)&size=(int)
     
     Example `GET` call
     ```
@@ -103,7 +103,7 @@
     ```
     
     Notes: 
-     - First page starts at 1
+     - First page starts at 1, anything less than 1 will default to 1.
      - Invalid page will default to 1
      - Invalid size will default to 10
     
