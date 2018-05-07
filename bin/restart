@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+
+set +e
+
+docker build -t chatter .
+docker rm -f $(docker ps -aq --filter "name=chatter")
+docker run -p 8080:8080 --name chatter --link mysql:mysql -d chatter

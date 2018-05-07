@@ -4,19 +4,21 @@
  - [Docker](https://www.docker.com/community-edition)
 
 #### Setup
-1. Run `./bin/build && ./bin/startsql`
-2. Take the ip output in the final line and update config.yaml's `db_ip` with that value.
-3. Run `./bin/startapp`
-4. The app should be visible on `http://localhost:8080/`
+1. Build base image. `cd base && ./build`
+2. Run `./bin/build && ./bin/startsql`
+3. Take the ip output in the final line and update config.yaml's `db_ip` with that value.
+4. Run `./bin/startapp`
+5. The app should be visible on `http://localhost:8080/`
 
-
- - you can run `./bin/stop` anytime to stop and remove containers
+ - you can run `./bin/restart` anytime to rebuild image, remove current container, and restart the app.
+ - you can run `./bin/stop` anytime to stop and remove both sql and app containers.
  NOTE: There's no volume binding, so you will lose ALL of your chats + users.
  
  #### Usage
   1. 
     - Create a user by providing a unique username and a password, you should be logged in on success.
     - Log back in with the same user.
+    
   2. Start chatting
  
  

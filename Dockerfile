@@ -1,18 +1,8 @@
-FROM golang:1.10
-
-MAINTAINER jackliu97@gmail.com
-
-WORKDIR /app
+FROM chatter-base
 
 COPY . /go/src/github.com/jackliu97/chatter
 
 WORKDIR /go/src/github.com/jackliu97/chatter
-
-RUN go get github.com/gorilla/mux
-RUN go get github.com/go-sql-driver/mysql
-RUN go get golang.org/x/crypto/bcrypt
-RUN go get github.com/spf13/viper
-RUN go get github.com/gorilla/websocket
 
 RUN go install
 
