@@ -1,7 +1,7 @@
 ### Chatter
 
 #### Requirements
- - docker 18.03
+ - [Docker](https://www.docker.com/community-edition)
 
 #### Setup
 1. Run `./bin/build && ./bin/startsql`
