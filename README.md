@@ -113,3 +113,4 @@
  - Login / log out functionality is very primitive. No session id or token is stored onto cookie.
  - Cannot drag and drop images.
  - Currently, image and video metadata are hard coded.
+ - Sanitize form inputs.
