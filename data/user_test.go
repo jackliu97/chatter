@@ -21,4 +21,3 @@ func Test_VerifyPassword_Fail(t *testing.T) {
 
 	assert.Error(t, user.VerifyPassword(testPassword2))
 }
-

@@ -5,6 +5,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
+
 // To test everything: go test ./data
 // go test ./data -run Test_ParseMessage_IsImage -v
 func Test_ParseMessage_IsImage(t *testing.T) {
@@ -36,7 +37,7 @@ func Test_ParseMessage_IsVideo(t *testing.T) {
 	ParseMessage(m)
 
 	expected, _ := json.Marshal(VideoMessage{
-		Length:  120,
+		Length: 120,
 		Source: "YouTube",
 		Url:    testUrl,
 	})
